@@ -1,0 +1,10 @@
+[Unit]
+Description=Systemctl to Run Admindb python script
+Wants=admindb.timer
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python /mnt/data/shared/admindb.py
+
+[Install]
+WantedBy=multi-user.target

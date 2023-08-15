@@ -1,0 +1,11 @@
+[Unit]
+Description=ystemctl timer to Run Admindb service evry 30 minutes
+
+[Timer]
+Persistent=true
+Unit=admindb.service
+OnBootSec=5m
+OnUnitActiveSec=30m
+
+[Install]
+WantedBy=multi-user.target
