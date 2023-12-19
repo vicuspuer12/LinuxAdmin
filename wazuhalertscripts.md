@@ -1,4 +1,5 @@
 [finalPdf.pdf](https://github.com/vicuspuer12/LinuxAdmin/files/13712436/finalPdf.pdf)
+
 Use Case:
 Enrich Slack notifications with Wazuh FIM and vulnerability alert details.
 
