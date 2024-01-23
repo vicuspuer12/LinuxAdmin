@@ -65,3 +65,42 @@ EOF
 echo "SQL root password: $MYSQL_ROOT_PASSWORD, moodle SQL password: $MYSQL_MOODLEUSER_PASSWORD"
 sudo chmod -R 777 /var/www/moodle
 echo "Step 5 has completed."
+
+# Web-based Install
+
+#You can now go to your web address (http://example http://example.com com or http://182.168.254.254) and complete the installation. You will need the following information:
+
+    #Database type: MariaDB
+    #Moodle User" moodleuser
+    #Moodle User Password: moodle SQL password (the one you wrote down earlier)
+
+#Default values Moodle directory is in /var/www/moodle, moodledata is in /var/www/moodledata 
+
+# Step 6 Secure the SQL Server and close down permissions on the moodle directory
+sudo mysql_secure_installation
+sudo chmod -R 755 /var/www/moodle
+echo "Step 6 has completed."
+
+#Recommended Extra Configuration
+
+#phpmyadmin provides a way to look at your database tables through a Web browser. It makes viewing and changing database tables much easier.
+
+#You will need your root SQL password when creating the new user. Remember to change the word "password" to a secure password
+
+# Install phpmyadmin
+sudo apt update
+sudo apt install phpmyadmin
+sudo ln -s /usr/share/phpmyadmin /var/www/moodle/phpmyadmin
+sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/phpmyadmin.conf
+sudo sed -i 's|/var/www/html|/usr/share/phpmyadmin|g' /etc/apache2/sites-available/phpmyadmin.conf
+sudo a2ensite phpmyadmin.conf
+sudo systemctl reload apache2
+sudo systemctl restart apache2
+sudo chown -R www-data:www-data /usr/share/phpmyadmin
+sudo chmod -R 755 /usr/share/phpmyadmin
+# Have you changed the phpmyadmin user password?
+mysql -u root -p
+CREATE USER 'phpmyadminuser'@'localhost' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON *.* TO 'phpmyadminuser'@'localhost' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+exit;
