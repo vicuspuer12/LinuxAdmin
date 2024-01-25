@@ -1,4 +1,4 @@
-!#/bin/bash
+#!/bin/bash
 # Step 1 LAMP server installaton
 #Update the system and install git, Apache, PHP and modules required by Moodle
 sudo apt-get update
