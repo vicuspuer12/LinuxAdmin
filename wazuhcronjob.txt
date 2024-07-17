@@ -1,3 +1,4 @@
 # crontab -e 
 0 0 * * * find /var/ossec/logs/alerts/ -type f -mtime +30 -exec rm -f {} \; 
 0 0 * * * find /var/ossec/logs/archives/ -type f -mtime +30 -exec rm -f {} \;
+0 0 * * * find /var/lib/wazuh-indexer/ -type f -mtime +90 -exec rm -f {} \;
