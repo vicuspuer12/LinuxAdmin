@@ -1,0 +1,42 @@
+We make a proxmox cluster, transfer all the VM's and containers, and finally delete that cluster.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Remove Node from cluster
+
+turn off node you want to remove
+
+pvecm nodes
+
+pvecm delnode (name of the node)
+
+reboot
+
+DELETE CLUSTER
+
+pvecm expected 1
+
+Stop the running cluster
+
+systemctl stop pve-cluster
+
+Force the nodes to run in local mode
+
+pmxcfs -l
+
+Delete all the cluster configuration files
+
+rm -f /etc/pve/cluster.conf /etc/pve/corosync.conf 
+
+rm -f /etc/cluster/cluster.conf /etc/corosync/corosync.conf 
+
+rm /var/lib/pve-cluster/.pmxcfs.lockfile
+
+Stop cluster from running
+
+systemctl stop pve-cluster
+
+Reboot and cluster should be gone
+
+
+rm /etc/corosync/authkey
