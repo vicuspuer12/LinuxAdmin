@@ -1,0 +1,9 @@
+Commands used in deploying a VM with Cloud image on Proxmox
+Add a serial console to the reference VM
+qm set <VM ID> --serial0 socket --vga serial0
+Change the file extension of the image to .qcow2
+mv ubuntu-22.04-minimal-cloudimg-amd64.img ubuntu-22.04.qcow2
+Resize the downloaded cloud image
+qemu-img resize ubuntu-22.04.qcow2 32G
+Import the cloud image into Proxmox
+qm importdisk 900 ubuntu-22.04.qcow2 local-lvm
